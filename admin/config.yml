@@ -7,6 +7,18 @@ public_folder: "/assets"
 
 collections:
   - name: "pages"
+    label: "Pages"
+    files:
+      - file: "pages/index.md"
+        label: "Home"
+        name: "home"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+
+collections:
+  - name: "pages"
   label: "Pages"
   files:
   - file: "pages/index.md"
