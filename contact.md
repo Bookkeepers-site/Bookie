@@ -11,7 +11,7 @@ Ready to talk to a bookkeeper or have a question about our services?  We’d lov
 * **Email:** admin@thebookkeeperssolution.com 
 * **Location:** Perth's Northern Suburbs, Bindoon & Chittering Valley, Western Australia – serving businesses locally and remotely.
 
-You can also reach us via the contact form below.  <h2>Get in touch</h2>
+You can also reach us via the contact form below.  <h2>Enter your details below</h2>
 <p>If you’d like more information, please drop your details below and we’ll get back to you soon.</p>
 
 <form name="contact" method="POST" data-netlify="true">
