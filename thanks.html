@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanks for subscribing — The Bookkeepers Solution</title>
+  <meta name="description" content="You're on the list! Thanks for subscribing to our monthly newsletter." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .thanks-wrap {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .thanks-card {
+      max-width: 620px;
+      background: var(--color-surface, #fff);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 20px;
+      padding: clamp(2rem, 4vw, 3.5rem);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    }
+    .thanks-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c9a961, #b89548);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(201,169,97,0.35);
+    }
+    .thanks-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin: 0 0 1rem;
+      color: var(--color-text, #222);
+    }
+    .thanks-card p {
+      color: var(--color-text-muted, #555);
+      font-size: 1.08rem;
+      line-height: 1.6;
+      margin: 0 0 1rem;
+    }
+    .thanks-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .thanks-foot {
+      margin-top: 1.75rem;
+      font-size: 0.85rem;
+      color: var(--color-text-faint, #888);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="container container--wide">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <button class="nav-close" aria-label="Close menu">✕</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="updates.html">Updates</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode"></button>
+        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== THANKS ===== -->
+<main class="thanks-wrap">
+  <div class="thanks-card">
+    <div class="thanks-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>You're on the list</h1>
+    <p>Thanks for subscribing to <strong>Small Business Monthly</strong>. Look out for our next issue landing in your inbox with the latest ATO updates, bookkeeping tips and small business insights.</p>
+    <p>In the meantime, if you've got a burning bookkeeping question, we'd love to hear from you.</p>
+    <div class="thanks-actions">
+      <a href="index.html" class="btn btn-primary">Back to Home</a>
+      <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <p class="thanks-foot">P.S. If our first email lands in your spam folder, give it a nudge to your inbox — we promise it's much nicer company than the ATO reminders.</p>
+  </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container container--wide">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
+          <span>The Bookkeepers Solution</span>
+        </a>
+        <p class="footer-tagline">Professional bookkeeping for small and medium businesses in Western Australia. Local knowledge, modern cloud tools.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="updates.html">Updates</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Day-to-Day Bookkeeping</a></li>
+          <li><a href="services.html">Payroll Support</a></li>
+          <li><a href="services.html">BAS &amp; GST Reporting</a></li>
+          <li><a href="services.html">Software Training</a></li>
+          <li><a href="services.html">Support Package</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 The Bookkeepers Solution. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
