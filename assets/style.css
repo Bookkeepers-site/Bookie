@@ -61,9 +61,9 @@ a:hover { color: var(--color-primary-dark); }
 
 /* ===== Header ===== */
 .site-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 100; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; gap: 2rem; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; gap: 2rem; }
 .site-logo { display: flex; align-items: center; gap: 0.75rem; color: var(--color-text); font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; }
-.site-logo img { height: 64px; width: auto; border-radius: 10px; }
+.site-logo img { height: 96px; width: auto; border-radius: 12px; }
 .site-nav { display: flex; gap: 2rem; align-items: center; }
 .site-nav a { color: var(--color-text); font-weight: 500; font-size: 0.95rem; }
 .site-nav a:hover, .site-nav a.active { color: var(--color-primary); }
