@@ -12,6 +12,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
+
+  <!-- MailerLite Universal -->
+  <script>
+  (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+  .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+  n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+  (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  ml('account', '2279484');
+  </script>
+  <!-- End MailerLite Universal -->
 </head>
 <body>
 
@@ -195,30 +205,23 @@
           </li>
         </ul>
       </div>
-      <form
-        class="newsletter-form"
-        name="newsletter"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        action="/thanks.html"
-      >
-        <input type="hidden" name="form-name" value="newsletter" />
-        <p class="hp-field" aria-hidden="true">
-          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-        </p>
+      <form class="newsletter-form ml-custom-form" id="ml-newsletter-hero" novalidate>
         <div class="form-field">
           <label for="nl-name">First name</label>
-          <input type="text" id="nl-name" name="name" placeholder="Jane" required />
+          <input type="text" id="nl-name" name="name" placeholder="Jane" required autocomplete="given-name" />
         </div>
         <div class="form-field">
           <label for="nl-email">Email address</label>
-          <input type="email" id="nl-email" name="email" placeholder="you@business.com.au" required />
+          <input type="email" id="nl-email" name="email" placeholder="you@business.com.au" required autocomplete="email" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;vertical-align:-3px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Subscribe — It's Free
+        <button type="submit" class="btn btn-primary btn-block ml-submit">
+          <span class="ml-submit-default">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;vertical-align:-3px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Subscribe — It's Free
+          </span>
+          <span class="ml-submit-loading" hidden>Subscribing…</span>
         </button>
+        <p class="ml-form-message" role="status" aria-live="polite"></p>
         <p class="newsletter-fineprint">We respect your inbox. Unsubscribe anytime with one click.</p>
       </form>
     </div>
@@ -388,9 +391,7 @@
           <span style="color:#fff;">The Bookkeepers Solution</span>
         </a>
         <p class="footer-tagline">Professional bookkeeping for small and medium businesses in Western Australia. Local knowledge, modern cloud tools.</p>
-        <form class="footer-newsletter" name="newsletter-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
-          <input type="hidden" name="form-name" value="newsletter-footer" />
-          <p class="hp-field" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <form class="footer-newsletter ml-custom-form" id="ml-newsletter-footer" novalidate>
           <label for="ft-email" class="footer-newsletter-label">Get our monthly newsletter</label>
           <div class="footer-newsletter-row">
             <input type="email" id="ft-email" name="email" placeholder="your@email.com" required aria-label="Email address" />
@@ -427,5 +428,108 @@
 </footer>
 
 <script src="js/main.js"></script>
+
+<!-- ===== MailerLite subscribe handler ===== -->
+<script>
+(function() {
+  var MAILERLITE_FORM_ID = '185244189577971465';
+  var ACCOUNT_ID = '2279484';
+  var ENDPOINT = 'https://assets.mailerlite.com/jsonp/' + ACCOUNT_ID + '/forms/' + MAILERLITE_FORM_ID + '/subscribe';
+
+  function showMessage(form, text, isError) {
+    var msg = form.querySelector('.ml-form-message');
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.className = 'ml-form-message';
+      msg.setAttribute('role', 'status');
+      msg.setAttribute('aria-live', 'polite');
+      form.appendChild(msg);
+    }
+    msg.textContent = text;
+    msg.style.color = isError ? '#c0392b' : '#1e5ea8';
+    msg.style.fontWeight = '600';
+    msg.style.marginTop = '0.75rem';
+  }
+
+  function setLoading(form, loading) {
+    var btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.style.opacity = loading ? '0.7' : '1';
+    btn.style.cursor = loading ? 'wait' : '';
+    var def = btn.querySelector('.ml-submit-default');
+    var load = btn.querySelector('.ml-submit-loading');
+    if (def && load) {
+      def.hidden = loading;
+      load.hidden = !loading;
+    }
+  }
+
+  function jsonpSubmit(params, callback) {
+    var cbName = 'ml_cb_' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
+    var query = [];
+    for (var k in params) {
+      if (Object.prototype.hasOwnProperty.call(params, k)) {
+        query.push(encodeURIComponent(k) + '=' + encodeURIComponent(params[k]));
+      }
+    }
+    query.push('callback=' + cbName);
+    var script = document.createElement('script');
+    script.src = ENDPOINT + '?' + query.join('&');
+    var timeout = setTimeout(function() { cleanup(); callback({ success: false, error: 'timeout' }); }, 15000);
+    function cleanup() {
+      clearTimeout(timeout);
+      try { delete window[cbName]; } catch (e) { window[cbName] = undefined; }
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+    window[cbName] = function(response) {
+      cleanup();
+      callback(response || { success: false });
+    };
+    script.onerror = function() { cleanup(); callback({ success: false, error: 'network' }); };
+    document.head.appendChild(script);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    var form = e.currentTarget;
+    var emailInput = form.querySelector('input[name="email"], input[type="email"]');
+    var nameInput = form.querySelector('input[name="name"]');
+    if (!emailInput || !emailInput.value || !/.+@.+\..+/.test(emailInput.value)) {
+      showMessage(form, 'Please enter a valid email address.', true);
+      return;
+    }
+    var params = {
+      'fields[email]': emailInput.value.trim()
+    };
+    if (nameInput && nameInput.value) {
+      params['fields[name]'] = nameInput.value.trim();
+    }
+    params['anticsrf'] = 'true';
+
+    setLoading(form, true);
+    showMessage(form, '', false);
+
+    jsonpSubmit(params, function(response) {
+      setLoading(form, false);
+      if (response && (response.success === true || response.code === 200 || response.status === 'success')) {
+        form.reset();
+        showMessage(form, 'Thanks! Check your inbox for a confirmation email — click the link and you\'re in.', false);
+      } else {
+        var errMsg = 'Something went wrong. Please try again or email us directly.';
+        if (response && response.message) errMsg = response.message;
+        showMessage(form, errMsg, true);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var forms = document.querySelectorAll('.ml-custom-form');
+    forms.forEach(function(form) {
+      form.addEventListener('submit', handleSubmit);
+    });
+  });
+})();
+</script>
 </body>
 </html>
