@@ -1,15 +1,28 @@
 ---
 layout: layout.njk
 title: "Updates"
+eyebrow: "Latest from the practice"
+heroTitle: "News, insights &"
+heroTitleEm: "updates"
+heroLead: "ATO updates, bookkeeping tips, small-business cash-flow insights, and whatever else we think's worth sharing."
+description: "The latest updates, ATO news and bookkeeping insights from The Bookkeepers Solution."
+permalink: /posts/
 ---
 
-<h2>Latest Updates</h2>
-
-<ul>
+{% set postCount = collections.posts | length %}
+{% if postCount > 0 %}
+<ul class="posts-grid reveal">
 {% for post in collections.posts | reverse %}
   <li>
-    <a href="{{ post.url }}">{{ post.data.title }}</a>
-    – {{ post.date | date("MMMM d, yyyy") }}
+    <a href="{{ post.url }}" class="post-card">
+      <span class="post-card-date">{{ post.date | date("MMMM d, yyyy") }}</span>
+      <h3>{{ post.data.title }}</h3>
+      {% if post.data.excerpt %}<p>{{ post.data.excerpt }}</p>{% endif %}
+      <span class="post-card-arrow">Read more →</span>
+    </a>
   </li>
 {% endfor %}
 </ul>
+{% else %}
+<p class="posts-empty">New posts coming soon — check back in a few weeks.</p>
+{% endif %}

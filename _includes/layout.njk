@@ -2,41 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>{{ title }}</title>
-  <link rel="stylesheet" href="/assets/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} — The Bookkeepers Solution</title>
+  <meta name="description" content="{{ description or 'Professional bookkeeping services for small and medium businesses in Perth\'s Northern Suburbs, Bindoon and Chittering Valley. Xero, MYOB, QuickBooks specialists.' }}" />
+  <meta property="og:title" content="{{ title }} — The Bookkeepers Solution" />
+  <meta property="og:description" content="{{ description or 'Taking the stress out of bookkeeping so you can focus on growing your business.' }}" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <!-- Replace logo.png with your actual logo file name once uploaded -->
-      <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="container container--wide">
+    <div class="header-inner">
+      <a href="/" class="site-logo" aria-label="The Bookkeepers Solution — home">
+        <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
+      </a>
+      <nav class="site-nav" aria-label="Main navigation" id="site-nav">
+        <button class="nav-close" aria-label="Close menu">✕</button>
+        <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
+        <a href="/about/" {% if page.url == "/about/" %}class="active"{% endif %}>About</a>
+        <a href="/services/" {% if page.url == "/services/" %}class="active"{% endif %}>Services</a>
+        <a href="/posts/" {% if "/posts/" in page.url %}class="active"{% endif %}>Updates</a>
+        <a href="/contact/" {% if page.url == "/contact/" %}class="active"{% endif %}>Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/#newsletter" class="btn btn-outline btn-sm hide-mobile" style="margin-right:8px;">Newsletter</a>
+        <a href="/contact/" class="btn btn-primary hide-mobile">Get in Touch</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-    <h1>The Bookkeepers Solution</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/services/">Services</a></li>
-        <li><a href="/posts/">Updates</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>{{ content | safe }}</main>
-  <footer>
-    <p>&copy; 2025 The Bookkeepers Solution</p>
-  </footer>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+{% if hideHero != true %}
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      {% if eyebrow %}<span class="hero-eyebrow">{{ eyebrow }}</span>{% endif %}
+      <h1>{{ heroTitle or title }}{% if heroTitleEm %} <em>{{ heroTitleEm }}</em>{% endif %}</h1>
+      {% if heroLead %}<p class="hero-lead">{{ heroLead }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="page-main">
+  <div class="container">
+    <div class="page-content">
+      {{ content | safe }}
+    </div>
+  </div>
+</main>
+
+<!-- ===== CTA ===== -->
+{% if hideCTA != true %}
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to take bookkeeping off your plate?</h2>
+    <p>Get in touch for a friendly, no-obligation chat about how we can help your business.</p>
+    <div class="cta-actions">
+      <a href="/contact/" class="btn btn-white">Book a Free Chat</a>
+      <a href="tel:+61419143150" class="btn btn-ghost">Call Us Today</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container container--wide">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="site-logo">
+          <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
+          <span style="color:#fff;">The Bookkeepers Solution</span>
+        </a>
+        <p class="footer-tagline">Professional bookkeeping for small and medium businesses in Western Australia. Local knowledge, modern cloud tools.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/posts/">Updates</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+61419143150">+61 419 143 150</a></li>
+          <li><a href="mailto:admin@thebookkeeperssolution.com">admin@thebookkeeperssolution.com</a></li>
+          <li>Perth Northern Suburbs, WA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 The Bookkeepers Solution. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Mobile nav toggle ===== -->
+<script>
+(function() {
+  var toggle = document.querySelector('.nav-toggle');
+  var close = document.querySelector('.nav-close');
+  var nav = document.querySelector('.site-nav');
+  if (!toggle || !nav) return;
+  function open() { nav.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function shut() { nav.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  toggle.addEventListener('click', open);
+  if (close) close.addEventListener('click', shut);
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', shut); });
+})();
+
+/* Scroll reveal — progressive enhancement */
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal-ready');
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px 50px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>

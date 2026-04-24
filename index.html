@@ -29,22 +29,21 @@
 <header class="site-header">
   <div class="container container--wide">
     <div class="header-inner">
-      <a href="index.html" class="site-logo">
+      <a href="/" class="site-logo">
         <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
       </a>
-      <nav class="site-nav" aria-label="Main navigation">
+      <nav class="site-nav" aria-label="Main navigation" id="site-nav">
         <button class="nav-close" aria-label="Close menu">✕</button>
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="updates.html">Updates</a>
-        <a href="contact.html">Contact</a>
+        <a href="/" class="active">Home</a>
+        <a href="/about/">About</a>
+        <a href="/services/">Services</a>
+        <a href="/posts/">Updates</a>
+        <a href="/contact/">Contact</a>
       </nav>
       <div class="header-actions">
-        <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode"></button>
-        <a href="#newsletter" class="btn btn-outline btn-sm" style="margin-right:8px;">Newsletter</a>
-        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <a href="#newsletter" class="btn btn-outline btn-sm hide-mobile" style="margin-right:8px;">Newsletter</a>
+        <a href="/contact/" class="btn btn-primary hide-mobile">Get in Touch</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -63,8 +62,8 @@
     <h1>Bookkeeping that <em>works</em> for your business</h1>
     <p class="hero-lead">Strategic, accurate and stress-free bookkeeping for small and medium businesses across Perth's Northern Suburbs, Bindoon and Chittering Valley — and anywhere in Australia, remotely.</p>
     <div class="hero-actions">
-      <a href="contact.html" class="btn btn-primary">Book a Free Chat</a>
-      <a href="services.html" class="btn btn-outline">Our Services</a>
+      <a href="/contact/" class="btn btn-primary">Book a Free Chat</a>
+      <a href="/services/" class="btn btn-outline">Our Services</a>
     </div>
     <div class="hero-trust">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -143,7 +142,7 @@
       </div>
     </div>
     <div style="text-align:center; margin-top: var(--space-10);">
-      <a href="services.html" class="btn btn-outline">View All Services</a>
+      <a href="/services/" class="btn btn-outline">View All Services</a>
     </div>
   </div>
 </section>
@@ -157,7 +156,7 @@
         <h2>Local knowledge, modern tools</h2>
         <p>The Bookkeepers Solution was founded right here in Western Australia. We combine local expertise with the best cloud bookkeeping tools to keep your accounts accurate and your business compliant.</p>
         <p>Our mission is simple: take the stress out of bookkeeping so you can focus on running and growing your business. We stay up to date with the latest legislation and best practices, so your financial records are always in safe hands.</p>
-        <a href="about.html" class="btn btn-primary">Meet the Team</a>
+        <a href="/about/" class="btn btn-primary">Meet the Team</a>
       </div>
       <div class="about-image-wrap">
         <img src="/assets/heidi.jpg" alt="Heidi — founder of The Bookkeepers Solution" class="about-photo" />
@@ -176,7 +175,7 @@
     <h2>Ready to take bookkeeping off your plate?</h2>
     <p>Get in touch for a friendly, no-obligation chat about how we can help your business.</p>
     <div class="cta-actions">
-      <a href="contact.html" class="btn btn-white">Book a Free Chat</a>
+      <a href="/contact/" class="btn btn-white">Book a Free Chat</a>
       <a href="tel:+61419143150" class="btn btn-ghost">Call Us Today</a>
     </div>
   </div>
@@ -386,7 +385,7 @@
   <div class="container container--wide">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="index.html" class="site-logo">
+        <a href="/" class="site-logo">
           <img src="/assets/logo.png" alt="The Bookkeepers Solution logo" />
           <span style="color:#fff;">The Bookkeepers Solution</span>
         </a>
@@ -402,21 +401,21 @@
       <div class="footer-col">
         <h4>Pages</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="updates.html">Updates</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/posts/">Updates</a></li>
+          <li><a href="/contact/">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="services.html">Day-to-Day Bookkeeping</a></li>
-          <li><a href="services.html">Payroll Support</a></li>
-          <li><a href="services.html">BAS &amp; GST Reporting</a></li>
-          <li><a href="services.html">Software Training</a></li>
-          <li><a href="services.html">Support Package</a></li>
+          <li><a href="/services/">Day-to-Day Bookkeeping</a></li>
+          <li><a href="/services/">Payroll Support</a></li>
+          <li><a href="/services/">BAS &amp; GST Reporting</a></li>
+          <li><a href="/services/">Software Training</a></li>
+          <li><a href="/services/">Support Package</a></li>
         </ul>
       </div>
     </div>
@@ -427,7 +426,20 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- Mobile nav toggle -->
+<script>
+(function() {
+  var toggle = document.querySelector('.nav-toggle');
+  var close = document.querySelector('.nav-close');
+  var nav = document.querySelector('.site-nav');
+  if (!toggle || !nav) return;
+  function open() { nav.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function shut() { nav.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  toggle.addEventListener('click', open);
+  if (close) close.addEventListener('click', shut);
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', shut); });
+})();
+</script>
 
 <!-- ===== MailerLite subscribe handler ===== -->
 <script>
