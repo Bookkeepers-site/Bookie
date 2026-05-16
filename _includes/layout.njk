@@ -5,10 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ title }} — The Bookkeepers Solution</title>
   <meta name="description" content="{{ description or 'Professional bookkeeping services for small and medium businesses in Perth\'s Northern Suburbs, Bindoon and Chittering Valley. Xero, MYOB, QuickBooks specialists.' }}" />
+  <link rel="canonical" href="https://www.thebookkeeperssolution.com{{ page.url }}" />
   <meta property="og:title" content="{{ title }} — The Bookkeepers Solution" />
   <meta property="og:description" content="{{ description or 'Taking the stress out of bookkeeping so you can focus on growing your business.' }}" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thebookkeeperssolution.com{{ page.url }}" />
+  <meta property="og:image" content="https://www.thebookkeeperssolution.com/assets/og-image.png" />
+  <meta property="og:site_name" content="The Bookkeepers Solution" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ title }} — The Bookkeepers Solution" />
+  <meta name="twitter:description" content="{{ description or 'Taking the stress out of bookkeeping so you can focus on growing your business.' }}" />
+  <meta name="twitter:image" content="https://www.thebookkeeperssolution.com/assets/og-image.png" />
   <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "name": "The Bookkeepers Solution",
+    "description": "Strategic bookkeeping for small and medium businesses in Perth's Northern Suburbs, Bindoon and Chittering Valley — and Australia-wide, remotely.",
+    "url": "https://www.thebookkeeperssolution.com",
+    "telephone": "+61419143150",
+    "email": "Heidi@thebookkeeperssolution.com",
+    "image": "https://www.thebookkeeperssolution.com/assets/logo.png",
+    "priceRange": "$$",
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Perth Northern Suburbs, WA" },
+      { "@type": "AdministrativeArea", "name": "Bindoon, WA" },
+      { "@type": "AdministrativeArea", "name": "Chittering Valley, WA" },
+      { "@type": "Country", "name": "Australia" }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "WA",
+      "addressCountry": "AU"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:30",
+      "closes": "17:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/TheBookkeepersSolution",
+      "https://www.instagram.com/TheBookkeepersSolution/",
+      "https://www.linkedin.com/company/TheBookkeepersSolution"
+    ],
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "ABN",
+      "value": "61 627 827 567"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -31,7 +79,6 @@
         <a href="/health-check/" {% if page.url == "/health-check/" %}class="active"{% endif %}>Free Health Check</a>
         <a href="/posts/" {% if "/posts/" in page.url %}class="active"{% endif %}>Updates</a>
         <a href="/contact/" {% if page.url == "/contact/" %}class="active"{% endif %}>Contact</a>
-        <a href="/book/" {% if page.url == "/book/" %}class="active"{% endif %}>Book a Call</a>
       </nav>
       <div class="header-actions">
         <a href="/#newsletter" class="btn btn-outline btn-sm hide-mobile" style="margin-right:8px;">Newsletter</a>
@@ -106,13 +153,18 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+61419143150">+61 419 143 150</a></li>
-          <li><a href="mailto:admin@thebookkeeperssolution.com">admin@thebookkeeperssolution.com</a></li>
+          <li><a href="mailto:Heidi@thebookkeeperssolution.com">Heidi@thebookkeeperssolution.com</a></li>
           <li>Perth Northern Suburbs, WA</li>
+        </ul>
+        <ul class="footer-socials" aria-label="Social media">
+          <li><a href="https://www.facebook.com/TheBookkeepersSolution" aria-label="Facebook" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.79c0-2.51 1.5-3.9 3.79-3.9 1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.25 0-1.64.77-1.64 1.57V12h2.79l-.45 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a></li>
+          <li><a href="https://www.instagram.com/TheBookkeepersSolution/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/company/TheBookkeepersSolution" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">&copy; 2026 The Bookkeepers Solution. All rights reserved.</p>
+      <p class="footer-copy">&copy; 2026 The Bookkeepers Solution &middot; ABN 61 627 827 567 &middot; Registered BAS Agent &middot; All rights reserved.</p>
     </div>
   </div>
 </footer>

@@ -29,7 +29,7 @@ hideCTA: true
       </div>
       <div>
         <div class="contact-card-label">Email</div>
-        <div class="contact-card-value"><a href="mailto:admin@thebookkeeperssolution.com">admin@thebookkeeperssolution.com</a></div>
+        <div class="contact-card-value"><a href="mailto:Heidi@thebookkeeperssolution.com">Heidi@thebookkeeperssolution.com</a></div>
       </div>
     </div>
 
