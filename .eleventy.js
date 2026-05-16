@@ -2,6 +2,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("thanks.html");
+  eleventyConfig.addPassthroughCopy("robots.txt");
 
   // Date filter for post listings
   eleventyConfig.addFilter("date", function(value, format) {
