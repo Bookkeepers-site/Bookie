@@ -1,0 +1,484 @@
+---
+layout: layout.njk
+title: "Cashflow Forecast"
+eyebrow: "O'Connor Racing · Generated 27 May 2026"
+heroTitle: "6-Month Cashflow"
+heroTitleEm: "Forecast"
+heroLead: "June – November 2026 · Based on Xero data current to 26 May 2026 · All figures in AUD"
+description: "6-month cashflow forecast for O'Connor Racing, prepared by The Bookkeepers Solution."
+permalink: /cashflow-forecast/
+hideCTA: true
+---
+
+<style>
+/* ── Forecast-specific overrides ── */
+.cf-snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+.cf-kpi { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.5rem 1.75rem; }
+.cf-kpi-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.4rem; }
+.cf-kpi-value { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 700; color: var(--color-text); line-height: 1; }
+.cf-kpi-value.positive { color: #1a8a4a; }
+.cf-kpi-value.negative { color: var(--color-accent); }
+.cf-kpi-value.warning { color: #c47c00; }
+.cf-kpi-sub { font-size: 0.82rem; color: var(--color-text-faint); margin-top: 0.4rem; }
+
+/* Table */
+.cf-table-wrap { overflow-x: auto; margin-bottom: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.cf-table { width: 100%; border-collapse: collapse; background: var(--color-surface); font-size: 0.9rem; }
+.cf-table th { background: var(--color-primary); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.8rem 1rem; text-align: right; white-space: nowrap; }
+.cf-table th:first-child { text-align: left; }
+.cf-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); text-align: right; }
+.cf-table td:first-child { text-align: left; font-weight: 500; color: var(--color-text); }
+.cf-table tr:last-child td { border-bottom: none; }
+.cf-table .row-section { background: var(--color-surface-alt); }
+.cf-table .row-section td { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary); padding-top: 1rem; padding-bottom: 0.3rem; border-bottom: none; }
+.cf-table .row-subtotal td { font-weight: 700; color: var(--color-text); border-top: 2px solid var(--color-border); border-bottom: 2px solid var(--color-border); }
+.cf-table .row-net td { font-weight: 700; font-size: 1rem; }
+.cf-table .row-net td.pos { color: #1a8a4a; }
+.cf-table .row-net td.neg { color: var(--color-accent); }
+.cf-table .row-closing td { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; background: #EAF4FF; color: var(--color-primary); }
+.cf-table .row-closing td.low { color: #c47c00; background: #FFF8E7; }
+.cf-table .row-closing td.critical { color: var(--color-accent); background: #FFF0EE; }
+
+/* Alerts */
+.cf-alerts { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+.cf-alert { display: flex; gap: 1rem; padding: 1.25rem 1.5rem; border-radius: var(--radius); border-left: 4px solid transparent; align-items: flex-start; }
+.cf-alert-icon { flex-shrink: 0; width: 22px; height: 22px; margin-top: 0.1rem; }
+.cf-alert-body { flex: 1; }
+.cf-alert-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 0.25rem; color: var(--color-text); }
+.cf-alert-desc { font-size: 0.88rem; color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+.cf-alert.red { background: #FFF0EE; border-color: var(--color-accent); }
+.cf-alert.amber { background: #FFF8E7; border-color: #c47c00; }
+.cf-alert.green { background: #EDFAF3; border-color: #1a8a4a; }
+
+/* Debtors table */
+.cf-debtors { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; font-size: 0.9rem; }
+.cf-debtors th { text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-faint); padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--color-border); }
+.cf-debtors td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); }
+.cf-debtors td:first-child { font-weight: 600; color: var(--color-text); }
+.cf-debtors .overdue-high { color: var(--color-accent); font-weight: 700; }
+.cf-debtors .overdue-med { color: #c47c00; font-weight: 600; }
+
+/* Assumptions */
+.cf-assumptions { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.75rem 2rem; margin-bottom: 2.5rem; }
+.cf-assumptions h3 { margin-bottom: 1rem; }
+.cf-assumptions ul { margin: 0; padding-left: 1.4rem; }
+.cf-assumptions li { color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 0.45rem; line-height: 1.5; }
+.cf-assumptions li strong { color: var(--color-text); }
+
+/* Top customers */
+.cf-customers { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.cf-customer-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.cf-customer-rank { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-faint); margin-bottom: 0.3rem; }
+.cf-customer-name { font-weight: 700; font-size: 0.95rem; color: var(--color-text); margin-bottom: 0.2rem; }
+.cf-customer-amount { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--color-primary); }
+
+/* Print */
+@media print {
+  .site-header, .site-footer, .cta-section, .page-hero { display: none !important; }
+  .page-main { padding-top: 0; }
+  .cf-table { font-size: 0.8rem; }
+  .cf-print-header { display: block !important; padding: 1.5rem 0 1rem; border-bottom: 2px solid var(--color-primary); margin-bottom: 1.5rem; }
+}
+.cf-print-header { display: none; }
+</style>
+
+<div class="cf-print-header">
+  <strong>O'Connor Racing — 6-Month Cashflow Forecast</strong><br>
+  <span style="color:#666;">June – November 2026 · Prepared by The Bookkeepers Solution · 27 May 2026</span>
+</div>
+
+## Financial Snapshot — 26 May 2026
+
+<div class="cf-snapshot reveal">
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Cash on Hand</div>
+    <div class="cf-kpi-value positive">$27,216</div>
+    <div class="cf-kpi-sub">Bank balance as at 26 May</div>
+  </div>
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Receivables Outstanding</div>
+    <div class="cf-kpi-value warning">$72,844</div>
+    <div class="cf-kpi-sub">59 invoices · all overdue</div>
+  </div>
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Payables Outstanding</div>
+    <div class="cf-kpi-value negative">$103,251</div>
+    <div class="cf-kpi-sub">Owed to suppliers</div>
+  </div>
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Working Capital</div>
+    <div class="cf-kpi-value negative">−$51,976</div>
+    <div class="cf-kpi-sub">Current liabilities exceed current assets</div>
+  </div>
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Avg Monthly Revenue</div>
+    <div class="cf-kpi-value positive">$27,668</div>
+    <div class="cf-kpi-sub">7-month avg · Nov 2025–May 2026</div>
+  </div>
+  <div class="cf-kpi">
+    <div class="cf-kpi-label">Avg Monthly Net Profit</div>
+    <div class="cf-kpi-value positive">$3,974</div>
+    <div class="cf-kpi-sub">Operations generating positive cash</div>
+  </div>
+</div>
+
+## 6-Month Forecast: June – November 2026
+
+<div class="cf-table-wrap reveal">
+<table class="cf-table">
+  <thead>
+    <tr>
+      <th style="min-width:200px;">Item</th>
+      <th>Jun 2026</th>
+      <th>Jul 2026</th>
+      <th>Aug 2026</th>
+      <th>Sep 2026</th>
+      <th>Oct 2026</th>
+      <th>Nov 2026</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Opening Cash</strong></td>
+      <td>$27,216</td>
+      <td>$26,190</td>
+      <td>$25,164</td>
+      <td>$24,138</td>
+      <td>$20,956</td>
+      <td>$16,679</td>
+    </tr>
+    <tr class="row-section">
+      <td colspan="7">Inflows</td>
+    </tr>
+    <tr>
+      <td>Training Fees</td>
+      <td>$17,003</td>
+      <td>$17,003</td>
+      <td>$17,003</td>
+      <td>$17,003</td>
+      <td>$17,003</td>
+      <td>$17,003</td>
+    </tr>
+    <tr>
+      <td>Sales</td>
+      <td>$5,146</td>
+      <td>$5,146</td>
+      <td>$5,146</td>
+      <td>$5,146</td>
+      <td>$5,146</td>
+      <td>$5,146</td>
+    </tr>
+    <tr>
+      <td>Other Revenue</td>
+      <td>$5,519</td>
+      <td>$5,519</td>
+      <td>$5,519</td>
+      <td>$5,519</td>
+      <td>$5,519</td>
+      <td>$5,519</td>
+    </tr>
+    <tr>
+      <td>Overdue Receivables Collected</td>
+      <td>$25,000</td>
+      <td>$20,000</td>
+      <td>$15,000</td>
+      <td>$7,844</td>
+      <td>$5,000</td>
+      <td>$0</td>
+    </tr>
+    <tr class="row-subtotal">
+      <td>Total Inflows</td>
+      <td>$52,668</td>
+      <td>$47,668</td>
+      <td>$42,668</td>
+      <td>$35,512</td>
+      <td>$32,668</td>
+      <td>$27,668</td>
+    </tr>
+    <tr class="row-section">
+      <td colspan="7">Outflows</td>
+    </tr>
+    <tr>
+      <td>Cost of Sales</td>
+      <td>$4,576</td>
+      <td>$4,576</td>
+      <td>$4,576</td>
+      <td>$4,576</td>
+      <td>$4,576</td>
+      <td>$4,576</td>
+    </tr>
+    <tr>
+      <td>Horses Purchased</td>
+      <td>$4,861</td>
+      <td>$4,861</td>
+      <td>$4,861</td>
+      <td>$4,861</td>
+      <td>$4,861</td>
+      <td>$4,861</td>
+    </tr>
+    <tr>
+      <td>Rent</td>
+      <td>$3,886</td>
+      <td>$3,886</td>
+      <td>$3,886</td>
+      <td>$3,886</td>
+      <td>$3,886</td>
+      <td>$3,886</td>
+    </tr>
+    <tr>
+      <td>Veterinary Costs</td>
+      <td>$2,084</td>
+      <td>$2,084</td>
+      <td>$2,084</td>
+      <td>$2,084</td>
+      <td>$2,084</td>
+      <td>$2,084</td>
+    </tr>
+    <tr>
+      <td>Wages &amp; Salaries</td>
+      <td>$1,813</td>
+      <td>$1,813</td>
+      <td>$1,813</td>
+      <td>$1,813</td>
+      <td>$1,813</td>
+      <td>$1,813</td>
+    </tr>
+    <tr>
+      <td>Insurance</td>
+      <td>$1,179</td>
+      <td>$1,179</td>
+      <td>$1,179</td>
+      <td>$1,179</td>
+      <td>$1,179</td>
+      <td>$1,179</td>
+    </tr>
+    <tr>
+      <td>Other Operating Expenses</td>
+      <td>$5,295</td>
+      <td>$5,295</td>
+      <td>$5,295</td>
+      <td>$5,295</td>
+      <td>$5,295</td>
+      <td>$5,295</td>
+    </tr>
+    <tr>
+      <td>Payables Clearance</td>
+      <td>$30,000</td>
+      <td>$25,000</td>
+      <td>$20,000</td>
+      <td>$15,000</td>
+      <td>$13,251</td>
+      <td>$0</td>
+    </tr>
+    <tr class="row-subtotal">
+      <td>Total Outflows</td>
+      <td>$53,694</td>
+      <td>$48,694</td>
+      <td>$43,694</td>
+      <td>$38,694</td>
+      <td>$36,945</td>
+      <td>$23,694</td>
+    </tr>
+    <tr class="row-net">
+      <td><strong>Net Cash Flow</strong></td>
+      <td class="neg">−$1,026</td>
+      <td class="neg">−$1,026</td>
+      <td class="neg">−$1,026</td>
+      <td class="neg">−$3,182</td>
+      <td class="neg">−$4,277</td>
+      <td class="pos">+$3,974</td>
+    </tr>
+    <tr class="row-closing">
+      <td><strong>Closing Cash</strong></td>
+      <td>$26,190</td>
+      <td>$25,164</td>
+      <td>$24,138</td>
+      <td class="low">$20,956</td>
+      <td class="critical">$16,679</td>
+      <td>$20,653</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p style="font-size:0.82rem; color:var(--color-text-faint); margin-top:-1.5rem; margin-bottom:2.5rem;">
+  <strong>Highlighted cells:</strong>
+  <span style="background:#FFF8E7; padding:2px 8px; border-radius:4px; margin:0 4px;">Amber</span> cash below $25k &nbsp;·&nbsp;
+  <span style="background:#FFF0EE; padding:2px 8px; border-radius:4px; margin:0 4px;">Red</span> cash below $20k &nbsp;·&nbsp;
+  Based on conservative receivables collection. If collection lags by 50%, October cash could fall below $0.
+</p>
+
+## Risk Flags
+
+<div class="cf-alerts reveal">
+  <div class="cf-alert red">
+    <svg class="cf-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <div class="cf-alert-body">
+      <p class="cf-alert-title">All 59 receivable invoices are overdue — $72,844 at risk</p>
+      <p class="cf-alert-desc">Not a single outstanding invoice is within terms. If collection slips to 50% of schedule, the October cash position turns negative. Immediate debtor follow-up is required to keep the forecast on track.</p>
+    </div>
+  </div>
+  <div class="cf-alert red">
+    <svg class="cf-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div class="cf-alert-body">
+      <p class="cf-alert-title">Negative working capital of −$51,976</p>
+      <p class="cf-alert-desc">Current liabilities ($149,971) exceed current assets ($70,780) by nearly $80k on the balance sheet. The business is relying on future receivable collections to meet current obligations — this leaves no margin for revenue disruption.</p>
+    </div>
+  </div>
+  <div class="cf-alert amber">
+    <svg class="cf-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <div class="cf-alert-body">
+      <p class="cf-alert-title">October is the critical month — minimum cash ~$16,679</p>
+      <p class="cf-alert-desc">As overdue receivables dry up and payables clearance continues, October sees the tightest cash position. Any unexpected expense or payment delay in Sep–Oct could require a short-term facility or emergency collection effort.</p>
+    </div>
+  </div>
+  <div class="cf-alert amber">
+    <svg class="cf-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <div class="cf-alert-body">
+      <p class="cf-alert-title">Training Fees now represent 61% of revenue — concentration risk</p>
+      <p class="cf-alert-desc">Training Fees grew from $213 to $119,021 this period (up 382% vs prior). This is a transformational shift, but the business is now heavily dependent on a single revenue stream. Revenue diversification should be a medium-term priority.</p>
+    </div>
+  </div>
+  <div class="cf-alert green">
+    <svg class="cf-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    <div class="cf-alert-body">
+      <p class="cf-alert-title">Operations are generating positive cash — the fundamentals are sound</p>
+      <p class="cf-alert-desc">With income up 83% year-on-year and a monthly net operating surplus of ~$3,974, the underlying business is healthy. The cashflow pressure is a working capital management problem, not a structural one. Collecting receivables and clearing payables resolves it.</p>
+    </div>
+  </div>
+</div>
+
+## Priority Debtors — Chase These First
+
+<table class="cf-debtors reveal">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Invoice</th>
+      <th>Amount Due</th>
+      <th>Days Overdue</th>
+      <th>Due Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Adam Fiezan</td>
+      <td>INV-1969</td>
+      <td><strong>$11,528.66</strong></td>
+      <td class="overdue-med">31 days</td>
+      <td>26 Apr 2026</td>
+    </tr>
+    <tr>
+      <td>Terry Kenyon</td>
+      <td>INV-1914</td>
+      <td><strong>$11,077.84</strong></td>
+      <td class="overdue-high">73 days</td>
+      <td>15 Mar 2026</td>
+    </tr>
+    <tr>
+      <td>Terry Kenyon</td>
+      <td>INV-1943</td>
+      <td><strong>$5,764.00</strong></td>
+      <td class="overdue-high">59 days</td>
+      <td>29 Mar 2026</td>
+    </tr>
+    <tr>
+      <td colspan="2"><em>Remaining 56 invoices</em></td>
+      <td><strong>$44,473.58</strong></td>
+      <td>Various</td>
+      <td>—</td>
+    </tr>
+    <tr style="font-weight:700; background:var(--color-surface-alt);">
+      <td colspan="2">Total Outstanding</td>
+      <td>$72,844.08</td>
+      <td colspan="2">59 invoices · all overdue</td>
+    </tr>
+  </tbody>
+</table>
+
+## Top Customers by Revenue (Last 12 Months)
+
+<div class="cf-customers reveal">
+  <div class="cf-customer-card">
+    <div class="cf-customer-rank">#1 Customer</div>
+    <div class="cf-customer-name">Adam Fiezan</div>
+    <div class="cf-customer-amount">$115,905</div>
+  </div>
+  <div class="cf-customer-card">
+    <div class="cf-customer-rank">#2 Customer</div>
+    <div class="cf-customer-name">Terry Kenyon</div>
+    <div class="cf-customer-amount">$44,181</div>
+  </div>
+  <div class="cf-customer-card">
+    <div class="cf-customer-rank">#3 Customer</div>
+    <div class="cf-customer-name">Tom Wolfe</div>
+    <div class="cf-customer-amount">$26,472</div>
+  </div>
+  <div class="cf-customer-card">
+    <div class="cf-customer-rank">#4 Customer</div>
+    <div class="cf-customer-name">Larry Coleman</div>
+    <div class="cf-customer-amount">$25,547</div>
+  </div>
+  <div class="cf-customer-card">
+    <div class="cf-customer-rank">#5 Customer</div>
+    <div class="cf-customer-name">Ashley Maley</div>
+    <div class="cf-customer-amount">$11,892</div>
+  </div>
+</div>
+
+## Assumptions &amp; Methodology
+
+<div class="cf-assumptions reveal">
+  <h3>How this forecast was built</h3>
+  <ul>
+    <li><strong>Revenue baseline:</strong> Monthly figures are the 7-month average from November 2025 – May 2026 (Xero P&L). No growth adjustment applied — this is a conservative flat projection.</li>
+    <li><strong>Expenses baseline:</strong> Monthly cost of sales ($4,576) and operating expenses ($19,118) are the same 7-month averages. Expenses treated as stable unless a known one-off exists.</li>
+    <li><strong>Overdue receivables collection:</strong> $72,844 modelled as collected over 5 months ($25k, $20k, $15k, $7.8k, $5k). This assumes active debtor management. Fiezan and Kenyon invoices are the priority.</li>
+    <li><strong>Payables clearance:</strong> The $103,251 outstanding payables balance is scheduled to clear over 5 months ($30k, $25k, $20k, $15k, $13.3k), using inflows from receivables collection and operations.</li>
+    <li><strong>Accrual vs cash:</strong> The P&L used is accrual-based. Cash timing may vary slightly where invoices are issued before payment is received. The forecast treats the monthly revenue figure as collected in the same month for simplicity.</li>
+    <li><strong>No capital expenditure, loan repayments or tax payments</strong> beyond what appears in the operating expense lines. If any fall due in this period, cash positions will be lower than shown.</li>
+    <li><strong>Data current to:</strong> 26 May 2026. Xero last refreshed 25 May 2026 22:31 AEST.</li>
+  </ul>
+</div>
+
+## Recommended Actions
+
+<div class="hc-checks-grid reveal">
+  <div class="hc-check-card">
+    <span class="hc-check-num">01</span>
+    <h3>Chase Terry Kenyon immediately</h3>
+    <p>Two invoices totalling $16,842 — 59 to 73 days overdue. Send a formal overdue notice and follow up by phone. Consider a payment plan if needed to get something moving.</p>
+  </div>
+  <div class="hc-check-card">
+    <span class="hc-check-num">02</span>
+    <h3>Contact Adam Fiezan this week</h3>
+    <p>$11,529 at 31 days overdue. Adam is also your #1 customer ($115,905 revenue) — the relationship matters, so handle carefully but don't delay the conversation.</p>
+  </div>
+  <div class="hc-check-card">
+    <span class="hc-check-num">03</span>
+    <h3>Set up automated payment reminders in Xero</h3>
+    <p>59 overdue invoices suggests reminders aren't running. Enable Xero's automated invoice reminders (7, 14, and 30 days overdue) to prevent this recurring.</p>
+  </div>
+  <div class="hc-check-card">
+    <span class="hc-check-num">04</span>
+    <h3>Negotiate payment terms with key suppliers</h3>
+    <p>With $103,251 in payables, talk to your biggest suppliers about extending to 60-day terms while you clear the receivables backlog. Most will cooperate if you communicate proactively.</p>
+  </div>
+  <div class="hc-check-card">
+    <span class="hc-check-num">05</span>
+    <h3>Protect October cash position</h3>
+    <p>October is the tightest month (~$16,679 forecast). Explore whether a $20k–$30k debtor finance facility or business overdraft would provide a buffer. Arrange it now, before you need it.</p>
+  </div>
+  <div class="hc-check-card">
+    <span class="hc-check-num">06</span>
+    <h3>Diversify revenue beyond Training Fees</h3>
+    <p>Training Fees account for 61% of revenue after surging from near-zero. While the growth is excellent, a single revenue stream of this dominance creates fragility. Identify 2–3 additional channels to develop over the next 12 months.</p>
+  </div>
+</div>
+
+<div class="hc-final-cta reveal" style="margin-top: 3rem;">
+  <h2 style="border:none; padding:0; margin:0 0 0.5rem;">Questions about this forecast?</h2>
+  <p>Get in touch — we can walk you through the numbers, model alternative scenarios, or help you set up Xero to track actuals against this forecast automatically.</p>
+  <a href="/contact/" class="btn btn-white btn-lg">Get in Touch</a>
+  <a href="/book/" class="btn btn-ghost btn-lg" style="margin-left:0.75rem;">Book a Call</a>
+</div>
