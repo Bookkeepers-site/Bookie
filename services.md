@@ -97,6 +97,59 @@ permalink: /services/
 
 </div>
 
+## Beyond the books
+
+<div class="service-detail-grid reveal">
+
+  <div class="service-detail-card">
+    <div class="service-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <h3>Business Health Check</h3>
+    <p>A free 10-point review of your books — delivered as a branded report within 48 hours.</p>
+    <ul>
+      <li>GST coding accuracy review</li>
+      <li>Cashflow visibility assessment</li>
+      <li>Compliance risk identification</li>
+      <li>Clear action plan</li>
+    </ul>
+    <a href="/health-check/" class="btn btn-outline btn-sm" style="margin-top: 0.5rem;">Learn more</a>
+  </div>
+
+  <div class="service-detail-card">
+    <div class="service-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <h3>Cashflow Planning</h3>
+    <p>Stop guessing and start forecasting with tools built for Australian small business.</p>
+    <ul>
+      <li>13-week rolling forecast</li>
+      <li>Scenario modelling</li>
+      <li>Seasonal planning</li>
+      <li>Decision-support reporting</li>
+    </ul>
+  </div>
+
+  <div class="service-detail-card">
+    <div class="service-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M16 14a4 4 0 0 1 4 4v2H4v-2a4 4 0 0 1 4-4"/></svg>
+    </div>
+    <h3>AI Implementation</h3>
+    <p>Practical AI tools for your bookkeeping and business operations — no hype, just results.</p>
+    <ul>
+      <li>AI tool selection &amp; setup</li>
+      <li>Workflow automation</li>
+      <li>Prompt engineering for finance</li>
+      <li>Staff training</li>
+    </ul>
+  </div>
+
+</div>
+
+## Digital products &amp; tools
+
+We also build and sell practical tools for bookkeepers and business owners. Visit the <a href="/shop/">shop</a> for spreadsheets, templates, checklists and prompt packs — all tested on real clients before they made it to the shelf.
+
 ## Not sure what you need?
 
 Every business is different. Book a free 20-minute chat and we'll work out exactly what your books need — no pressure, no jargon, no obligation.
